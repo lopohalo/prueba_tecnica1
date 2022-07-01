@@ -1,0 +1,103 @@
+
+<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-1">
+            <div class="card-heading"></div>
+            <div class="card-body">
+                <input class="verificacion1" disabled value="" #spanValidarFormulario />
+                <h2 class="title">Registro Usuario</h2>
+                <form [formGroup]="registroGrupo" (ngSubmit)="AnalizandoRegistro()">
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <label for="name">Nombre</label>
+                            <div class="input-group">
+                                <input formControlName="name"  (click)="cambio3()" id="name" data-name="false" #name class="input--style-1" type="text" placeholder="Nombre Ej. Juan Sebastian">
+                                <span  #boton   class="icon"><i #iconame class="fa-solid fa-user i"></i></span>
+                                <span class="error" *ngIf="registroGrupo.get('name')?.hasError('required') && registroGrupo.get('name')?.touched">Nombre Obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <label for="direccion">Direccion</label>
+                            <div class="input-group">
+                                <input formControlName="direccion" (click)="cambio4()" class="input--style-1"  data-lastname="false" #lastname type="text" id="apellido" placeholder="Direccion Ej. cll 53b 25-28">
+                                <span #boton class="icon"><i #icolastname class="fa-solid fa-user-plus i"></i></span>
+                                <span class="error" *ngIf="registroGrupo.get('direccion')?.hasError('required') && registroGrupo.get('direccion')?.touched">Direccion Obligatorio</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <label for="email">Correo Electronico</label>
+                            <div class="input-group">
+                                <input formControlName="email"(click)="cambio5()"  #email data-email="false" class="input--style-1" type="email" id="email" placeholder="Ej. jsebg.ruedat@gmail.com">
+                                <span #boton  class="icon"><i #icoemail class="fa-solid fa-at i"></i></span>
+                                <span class="error" *ngIf="registroGrupo.get('email')?.hasError('pattern')">Correo invalido</span>
+                                <span class="error" *ngIf="registroGrupo.get('email')?.hasError('required') && registroGrupo.get('email')?.touched">Correo Obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <label for="number">Telefono</label>
+                            <div class="input-group">
+                                <input formControlName="number" (click)="cambio6()" #number data-number="false" class="input--style-1" type="text" id="number" placeholder="Ej. 3172466043">
+                                <span #boton class="icon"><i #iconumber class="fa-solid fa-phone i"></i></span>
+                                <span class="error" *ngIf="registroGrupo.get('number')?.hasError('minLength')">Numero invalido, corto</span>
+                                <span class="error" *ngIf="registroGrupo.get('number')?.hasError('maxLength')">Numero invalido, largo</span>
+                                <span class="error" *ngIf="registroGrupo.get('number')?.hasError('pattern')">Numero invalido</span>
+                                <span class="error" *ngIf="registroGrupo.get('number')?.hasError('required') && registroGrupo.get('number')?.touched">Numero Obligatorio</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <label for="nit">Nit</label>
+                            <div class="input-group">
+                                <input formControlName="nit" class="input--style-1 js-datepicker" id="nit" type="text">
+                                <span class="error" *ngIf="registroGrupo.get('nit')?.hasError('required') && registroGrupo.get('nit')?.touched">Nit Obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group-select">
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                    <select formControlName="empresa" name="gender" class="form-control" class="pepe">
+                                        <option disabled="disabled" selected="selected">--Seleccione Empresa---</option>
+                                        <option>Microsoft</option>
+                                        <option>Amazon</option>
+                                        <option>Fusepong</option>
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <label for="password"> Contraseña</label>
+                            <div class="input-group">
+                                <input formControlName="password" (click)="cambio7()" data-contra="false"  data-muestraj="false" id="password" #password class="input--style-1" id="password" type="password" style="padding-left: 28px;" placeholder="Orlando123@">
+                                <span #boton ><i #icocontra class="fa-solid fa-lock candado"></i></span>
+                                <span #boton (click)="cambio1()" class="icon"><img #img class="i imagen-icono"src="./assets/img/eye-slash-solid.svg"/></span>
+                                <span class="error" *ngIf="registroGrupo.get('password')?.hasError('pattern')">Contraseña Debil invalida.</span>
+                                <span class="error" *ngIf="registroGrupo.get('password')?.hasError('required') && registroGrupo.get('password')?.touched">Contraseña Obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <label for="password1">Confirmar Contraseña</label>
+                            <div class="input-group">
+                                <input formControlName="password1"(focusout)="ComprobandoPassword()"(click)="cambio8()"  data-contra1="false" data-muestrak="false" class="input--style-1" #password1 id="password1" type="password" style="padding-left: 28px;">
+                                <span #boton ><i #icocontra1 class="fa-solid fa-lock candado"></i></span>
+                                <span #boton (click)="cambio2()" class="icon"><img #img2 class="i imagen-icono" src="./assets/img/eye-slash-solid.svg"/></span>
+                                <span class="error" *ngIf="registroGrupo.get('password1')?.hasError('required') && registroGrupo.get('password1')?.touched">Contraseña Obligatorio</span>
+                                <input class="verificacion" disabled value="" #spanconfirma />
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="p-t-20">
+                        <button class="btn btn--radius btn--green" [disabled]="registroGrupo.invalid" type="submit">Registrarse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
