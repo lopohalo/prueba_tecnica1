@@ -46,7 +46,12 @@ export class RegistroComponent implements OnInit {
             ])],
             name: ['', Validators.required],
             direccion: ['',Validators.required],
-            nit: ['', Validators.required],
+            nit: ['', Validators.compose([
+                Validators.required,
+                Validators.minLength(9),
+                Validators.maxLength(9),
+                Validators.pattern(/^[1-9]\d{9}$/)
+            ])],
             empresa: ['--Seleccione Empresa---',Validators.required],
         })
 

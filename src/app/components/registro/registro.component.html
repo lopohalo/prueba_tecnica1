@@ -51,7 +51,10 @@
                         <div class="col-2">
                             <label for="nit">Nit</label>
                             <div class="input-group">
-                                <input formControlName="nit" class="input--style-1 js-datepicker" id="nit" type="text">
+                                <input formControlName="nit" class="input--style-1 js-datepicker" id="nit" type="text" placeholder="1-9">
+                                <span class="error" *ngIf="registroGrupo.get('nit')?.hasError('minLength')">Nit invalido, corto</span>
+                                <span class="error" *ngIf="registroGrupo.get('nit')?.hasError('maxLength')">Nit invalido, largo</span>
+                                <span class="error" *ngIf="registroGrupo.get('nit')?.hasError('pattern')">Nit invalido</span>
                                 <span class="error" *ngIf="registroGrupo.get('nit')?.hasError('required') && registroGrupo.get('nit')?.touched">Nit Obligatorio</span>
                             </div>
                         </div>
