@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarfijaComponent } from './components/navbarfija/navbarfija.component';
 
 
 
@@ -12,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     declarations: [
         AppComponent,
         RegistroComponent,
+        NavbarfijaComponent
     ],
     imports: [
         BrowserModule,

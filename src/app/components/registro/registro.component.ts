@@ -50,7 +50,7 @@ export class RegistroComponent implements OnInit {
                 Validators.required,
                 Validators.minLength(9),
                 Validators.maxLength(9),
-                Validators.pattern(/^[1-9]\d{9}$/)
+                Validators.pattern(/^[1-8]\d{8}$/)
             ])],
             empresa: ['--Seleccione Empresa---',Validators.required],
         })

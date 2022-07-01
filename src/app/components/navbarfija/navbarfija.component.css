@@ -1,0 +1,134 @@
+.logonav {
+    width: 140px;
+    height: 90px;
+}
+.btn {
+    color: #ffffff;
+    background-color: #1D70B7;
+}
+.navfija {
+    background: #eff5fadc;
+}
+.slogan {
+    padding-left: 1px;
+    font-style: italic;
+    color: #1D70B7;
+}
+.icononav:hover {
+    color: #1D70B7;
+}
+.icononav {
+    color: #BD1222;
+    border-radius: 5px;
+}
+.imagen-icono {
+    width: 18px;
+}
+.btn-cerrar{
+    background-color: #BD1222;
+    margin-left: 22px;
+}
+.error {
+    color: red;
+    font-size: 16px;
+    position: relative;
+    top: 30px;
+}
+.input--style-1 {
+    padding: 9px 0;
+    color: rgb(56, 56, 56);
+}
+
+.input--style-1::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: rgb(179, 171, 171);
+}
+
+.input--style-1:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #555;
+    opacity: 1;
+}
+
+.input--style-1::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #555;
+    opacity: 1;
+}
+
+.input--style-1:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #555;
+}
+
+.input--style-1:-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #555;
+}
+input {
+    outline: none;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    width: 100%;
+    font-size: 14px;
+    font-family: inherit;
+}
+.form-text{
+    display: block;
+    position: absolute;
+    margin-top: 50px;
+}
+.form-text1{
+    display: block;
+    position: absolute;
+    margin-top: 15px;
+    font-size: .875em;
+    color: #6c757d;
+}
+
+.input-group input {
+    position: relative;
+    border-bottom: 2px solid #ccc;
+}
+.candado{
+    position: absolute;
+    display: block;
+    bottom: 0.9rem;
+    left: 0.2rem;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    color: rgb(170, 166, 166);
+}
+
+.input-group-select {
+    position: relative;
+    top: 23px;
+    border-bottom: 2px solid #ccc;
+}
+
+.input-group input:hover {
+    border-bottom: 2px solid rgb(1, 26, 214) ;
+    transition-duration: 1s
+}
+
+.input-group input:focus {
+    border-bottom: 2px solid rgb(1, 26, 214) ;
+    transition-duration: 1s
+}
+
+.i {
+    position: absolute;
+    display: block;
+    bottom: 0.5rem;
+    right: 0rem;
+    user-select: none;
+    cursor: pointer;
+    color: rgb(170, 166, 166);
+}
+
+
+/* #1D70B7 */
+/* #BD1222 */
