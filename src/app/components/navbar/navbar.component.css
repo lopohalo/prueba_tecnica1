@@ -1,0 +1,36 @@
+
+.menu {
+    touch-action: manipulation;
+    cursor: pointer;
+
+}
+.navbarmenu {
+    font-size: 20px;
+    background-color: #dde4eadc;
+}
+
+
+.registro {
+    color: #1D70B7;
+    background: #eff5fadc;
+    border-radius: 100px;
+    border-color: #1D70B7;
+    border-style:groove;
+    font-weight:bold ;
+}
+.registro:hover{
+    background-color:#1D70B7;
+    color: #bd1223;
+}
+
+
+
+.btn {
+    color:#ffffff;
+    background-color: #1D70B7;
+}
+
+
+
+/* #1D70B7 */
+/* #BD1222 */

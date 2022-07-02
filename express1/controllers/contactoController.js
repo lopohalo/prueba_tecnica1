@@ -82,9 +82,7 @@ exports.autenticar = async (req, res) => {
     } 
     const password1 = await existeUsuario.password
     if(password1 == password){
-        res.json({
-            name: existeUsuario.name,
-        })
+        res.json(existeUsuario)
     }else{
         return res.status(500).json({ mensaje: "Usuario o contraseña no coincide" })
     }

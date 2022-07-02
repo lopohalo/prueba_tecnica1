@@ -1,29 +1,25 @@
 
 const mongoose = require('mongoose')
 
-const contactoSchema = mongoose.Schema({
-    email: {
-        type: String,
-        required: false
-    },
-    password: {
-        type: String,
-        required: false
-    },
+const empresaSchema = mongoose.Schema({
     name: {
         type: String,
-        required: false
+        required:false
     },
-    empresa:{
-        type: String,
-        required: false
-    },
-    documento: {
-        type: String,
-        required: false
-    },
-    tareas: {
+    history:{
         type: Array,
+        required: false
+    },
+    nit:{
+        type: String,
+        required: false
+    },
+    dirección:{
+        type: String,
+        required: false
+    },
+    telefono:{
+        type: String,
         required: false
     },
     fec_cre: {
@@ -32,4 +28,4 @@ const contactoSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("contacto", contactoSchema)
+module.exports = mongoose.model("empresa", empresaSchema)

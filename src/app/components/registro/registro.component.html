@@ -40,8 +40,8 @@
                             <div class="input-group">
                                 <input formControlName="number" (click)="cambio6()" #number data-number="false" class="input--style-1" type="text" id="number" placeholder="Ej. 3172466043">
                                 <span #boton class="icon"><i #iconumber class="fa-solid fa-phone i"></i></span>
-                                <span class="error" *ngIf="registroGrupo.get('number')?.hasError('minLength')">Numero invalido, corto</span>
-                                <span class="error" *ngIf="registroGrupo.get('number')?.hasError('maxLength')">Numero invalido, largo</span>
+                                <span class="error" *ngIf="registroGrupo.get('number')?.hasError('minlength')">Numero invalido, corto</span>
+                                <span class="error" *ngIf="registroGrupo.get('number')?.hasError('maxlength')">Numero invalido, largo</span>
                                 <span class="error" *ngIf="registroGrupo.get('number')?.hasError('pattern')">Numero invalido</span>
                                 <span class="error" *ngIf="registroGrupo.get('number')?.hasError('required') && registroGrupo.get('number')?.touched">Numero Obligatorio</span>
                             </div>
@@ -49,13 +49,13 @@
                     </div>
                     <div class="row row-space">
                         <div class="col-2">
-                            <label for="nit">Nit</label>
+                            <label for="nit">Documento</label>
                             <div class="input-group">
-                                <input formControlName="nit" class="input--style-1 js-datepicker" id="nit" type="text" placeholder="1-9">
-                                <span class="error" *ngIf="registroGrupo.get('nit')?.hasError('minLength')">Nit invalido, corto</span>
-                                <span class="error" *ngIf="registroGrupo.get('nit')?.hasError('maxLength')">Nit invalido, largo</span>
-                                <span class="error" *ngIf="registroGrupo.get('nit')?.hasError('pattern')">Nit invalido</span>
-                                <span class="error" *ngIf="registroGrupo.get('nit')?.hasError('required') && registroGrupo.get('nit')?.touched">Nit Obligatorio</span>
+                                <input formControlName="documento" class="input--style-1 js-datepicker" id="nit" type="text" placeholder="1-9">
+                                <span class="error" *ngIf="registroGrupo.get('documento')?.hasError('minLength')">Documento invalido, corto</span>
+                                <span class="error" *ngIf="registroGrupo.get('documento')?.hasError('maxLength')">Documento invalido, largo</span>
+                                <span class="error" *ngIf="registroGrupo.get('documento')?.hasError('pattern')">Documento invalido</span>
+                                <span class="error" *ngIf="registroGrupo.get('documento')?.hasError('required') && registroGrupo.get('documento')?.touched">Documento Obligatorio</span>
                             </div>
                         </div>
                         <div class="col-2">

@@ -4,7 +4,7 @@ export class Contacto {
     password: string;
     name: string;
     direccion: string;
-    nit: string;
+    documento: string;
     empresa: string;
     number: string;
 
@@ -12,14 +12,14 @@ export class Contacto {
         password: string,
         name: string,
         direccion: string,
-        nit: string,
+        documento: string,
         number: string,
         empresa: string) {
         this.email = email
         this.password = password
         this.name = name
         this.direccion = direccion
-        this.nit = nit
+        this.documento = documento
         this.number = number
         this.empresa = empresa
     }

@@ -1,0 +1,45 @@
+<nav class="navbarmenu navbar-expand-lg">
+    <div class="container d-flex">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            <i class="fa-solid fa-bars icononav"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav me-auto mb-3 ms-4 mb-lg-0  menu" style="margin-top:10px">
+                <li class="nav-item">
+                    <a class="registro nav-link ps-3 pe-3 pt-1 pb-1 ms-2" href="#" tabindex="-1"
+                        [routerLink]="['/registro']" aria-disabled="true">Registro</a>
+                </li>
+            </ul>
+            <ng-template [ngIf]="empresa == 'Amazon'" >
+                <ul class="navbar-nav me-auto mb-3 ms-4 mb-lg-0  menu" style="margin-top:10px">
+                    <span>Tu empresa es</span>
+                    <li class="nav-item">
+                        <a class="registro nav-link ps-3 pe-3 pt-1 pb-1 ms-2" href="#" tabindex="-1"
+                            [routerLink]="['/registro']" aria-disabled="true">Amazon</a>
+                    </li>
+                </ul>
+            </ng-template>
+            <ng-template [ngIf]="empresa == 'Microsoft'" >
+                <ul class="navbar-nav me-auto mb-3 ms-4 mb-lg-0  menu" style="margin-top:10px">
+                    <span>Tu empresa es</span>
+                    <li class="nav-item">
+                        <a class="registro nav-link ps-3 pe-3 pt-1 pb-1 ms-2" href="#" tabindex="-1"
+                            [routerLink]="['/registro']" aria-disabled="true">Microsoft</a>
+                    </li>
+                </ul>
+            </ng-template>
+            <ng-template [ngIf]="empresa == 'Fusepong'" >
+                <ul class="navbar-nav me-auto mb-3 ms-4 mb-lg-0  menu" style="margin-top:10px">
+                    <span>Tu empresa es</span>
+                    <li class="nav-item">
+                        <a class="registro nav-link ps-3 pe-3 pt-1 pb-1 ms-2" href="#" tabindex="-1"
+                            [routerLink]="['/registro']" aria-disabled="true">Fusepong</a>
+                    </li>
+                </ul>
+            </ng-template>
+        </div>
+        </div>
+
+</nav>

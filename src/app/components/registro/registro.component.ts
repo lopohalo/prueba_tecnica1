@@ -12,6 +12,7 @@ import Swal from 'sweetalert2'
 })
 export class RegistroComponent implements OnInit {
     registroGrupo: FormGroup;
+    guardarEmpresa: any
     revisarCorreo = /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/
     revisarNumero =  /([0-18])$/
     revisarContraseñaFuerte = /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/
@@ -46,11 +47,11 @@ export class RegistroComponent implements OnInit {
             ])],
             name: ['', Validators.required],
             direccion: ['',Validators.required],
-            nit: ['', Validators.compose([
+            documento: ['', Validators.compose([
                 Validators.required,
                 Validators.minLength(9),
-                Validators.maxLength(9),
-                Validators.pattern(/^[1-8]\d{8}$/)
+                Validators.maxLength(10),
+                Validators.pattern(/^[1-9]\d{9}$/)
             ])],
             empresa: ['--Seleccione Empresa---',Validators.required],
         })
@@ -89,7 +90,7 @@ export class RegistroComponent implements OnInit {
             name: this.registroGrupo.get('name')?.value,
             empresa: this.registroGrupo.get('empresa')?.value,
             direccion: this.registroGrupo.get('direccion')?.value,
-            nit: this.registroGrupo.get('nit')?.value
+            documento: this.registroGrupo.get('documento')?.value
         }
         const confirmando1 = this.spanValidarFormulario?.nativeElement
         if(this.ComprobandoPassword() == false){
@@ -107,6 +108,8 @@ export class RegistroComponent implements OnInit {
                 })
 
                 const nombre = [data.name]
+                this.guardarEmpresa = [data.empresa]
+                localStorage.setItem('Empresa',JSON.stringify(this.guardarEmpresa))
 
                 localStorage.setItem('Nombre', JSON.stringify(nombre) )
                 setTimeout(() => {

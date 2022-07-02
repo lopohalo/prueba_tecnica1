@@ -15,6 +15,7 @@ export class NavbarfijaComponent implements OnInit {
     productoForm: FormGroup;
     iniciarSesion: any;
     guardarNombre: any;
+    guardarEmpresa: any;
     popo: any;
     pepe: any;
     revisarCorreo = /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/
@@ -38,9 +39,12 @@ export class NavbarfijaComponent implements OnInit {
             password: this.productoForm.get('password')?.value,
         }
         this._contactoService.postLogin(iniciarSesion).subscribe(data => {
+            console.log
             this.productoForm.reset()
             inicio.click()
             this.guardarNombre = [data.name]
+            this.guardarEmpresa = [data.empresa]
+            localStorage.setItem('Empresa',JSON.stringify(this.guardarEmpresa))
             localStorage.setItem('Nombre', JSON.stringify(this.guardarNombre))
             this.popo = localStorage.getItem('Nombre')
             this.pepe = JSON.parse(this.popo)
@@ -63,6 +67,7 @@ export class NavbarfijaComponent implements OnInit {
     }
     cerrarSesion() {
         localStorage.setItem('Nombre', '[]')
+        localStorage.setItem('Empresa','[]')
         this.popo = localStorage.getItem('Nombre')
         this.pepe = JSON.parse(this.popo)
         setTimeout(() =>{
