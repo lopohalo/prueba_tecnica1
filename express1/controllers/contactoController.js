@@ -39,25 +39,26 @@ exports.obtenerContacto = async (req, res) => {
         res.status(500).send("Hay un problema")
     }
 }
-// exports.actualizarContacto = async (req, res) => {
-//     try {
-//         const { email } = req.body
+exports.actualizarContacto = async (req, res) => {
+    try {
+        const { email,tareas } = req.body
 
-//         const existeUsuario = await Contacto.findOne({ email })
-//         if (!existeUsuario) {
-//             res.status(404).json({ mensaje: "No existe la información solicitada" })
-//         }
+        const existeUsuario = await Contacto.findOne({ email })
+        if (!existeUsuario) {
+            res.status(404).json({ mensaje: "No existe la información solicitada" })
+        }
+        existeUsuario.tareas = tareas
 
 
 
-//         let procesoUpdate = await Contacto.findOneAndUpdate({ email }, existeUsuario, { new: true })
-//         res.json(procesoUpdate)
+        let procesoUpdate = await Contacto.findOneAndUpdate({ email }, existeUsuario, { new: true })
+        res.json(procesoUpdate)
 
-//     } catch (error) {
-//         console.log(error)
-//         res.status(500).send("Hay un problema")
-//     }
-// }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("Hay un problema")
+    }
+}
 exports.borrarContacto = async (req, res) => {
     try {
         let contacto = await Contacto.findById(req.params.id)
