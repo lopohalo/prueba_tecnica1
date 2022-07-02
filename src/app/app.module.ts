@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarfijaComponent } from './components/navbarfija/navbarfija.component';
 import { NavbarComponent} from './components/navbar/navbar.component';
+import { EmpresasComponent } from './components/empresas/empresas.component';
+import { CitasComponent } from './components/citas/citas.component';
 
 
 
@@ -15,7 +17,9 @@ import { NavbarComponent} from './components/navbar/navbar.component';
         AppComponent,
         RegistroComponent,
         NavbarfijaComponent,
-        NavbarComponent
+        NavbarComponent,
+        EmpresasComponent,
+        CitasComponent
     ],
     imports: [
         BrowserModule,

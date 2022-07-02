@@ -39,7 +39,7 @@ export class NavbarfijaComponent implements OnInit {
             password: this.productoForm.get('password')?.value,
         }
         this._contactoService.postLogin(iniciarSesion).subscribe(data => {
-            console.log
+            localStorage.setItem('usuario', JSON.stringify(data._id))
             this.productoForm.reset()
             inicio.click()
             this.guardarNombre = [data.name]
@@ -50,6 +50,7 @@ export class NavbarfijaComponent implements OnInit {
             this.pepe = JSON.parse(this.popo)
 
                 window.location.reload()
+                this.router.navigate(['/empresas'])
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -68,8 +69,10 @@ export class NavbarfijaComponent implements OnInit {
     cerrarSesion() {
         localStorage.setItem('Nombre', '[]')
         localStorage.setItem('Empresa','[]')
+        localStorage.setItem('usuario', '[]')
         this.popo = localStorage.getItem('Nombre')
         this.pepe = JSON.parse(this.popo)
+        this.router.navigate(['/registro'])
         setTimeout(() =>{
             window.location.reload()
         },200)

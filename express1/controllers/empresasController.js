@@ -45,6 +45,7 @@ exports.actualizarEmpresa = async (req, res) => {
 exports.obtenerEmpresa = async (req, res) => {
     try {
         const {name} = req.body
+        console.log(name)
         let empresa = await Empresas.findOne({name})
         if (!empresa) {
             res.status(404).json({ mensaje: "No existe la información solicitada" })

@@ -98,7 +98,7 @@ export class RegistroComponent implements OnInit {
         }else{
             this.renderer2.setAttribute(confirmando1, 'value', '')
             this._contactoService.postContacto(registroGrupo).subscribe(data => {
-                console.log(data)
+                localStorage.setItem('usuario', JSON.stringify(data._id))
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -112,6 +112,7 @@ export class RegistroComponent implements OnInit {
                 localStorage.setItem('Empresa',JSON.stringify(this.guardarEmpresa))
 
                 localStorage.setItem('Nombre', JSON.stringify(nombre) )
+                this.router.navigate(['/empresas'])
                 setTimeout(() => {
                     window.location.reload()
                 },1000)

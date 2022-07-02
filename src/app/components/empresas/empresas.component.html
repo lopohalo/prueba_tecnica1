@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mx-5 my-5" >
+                <div class="card-body text-center" *ngFor="let obj of  EmpresaUsuario">
+                    <h1 class="card-title">{{obj.name}}</h1>
+                    <h6 class="card-subtitle mb-2 text-muted"><span>NIT:</span>{{obj.nit}}</h6>
+                    <p class="card-text"><span>Correo:</span> {{obj.correo}}</p>
+                    <p class="card-text"><span>Telefono:</span> {{obj.telefono}}</p>
+                    <p class="card-text"><span>Direccion:</span> {{obj.direccion}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-center">
+            <div class="container mx-auto "*ngFor="let obj of  EmpresaUsuario" >
+                <h1 class="font-black text-5xl text-center md:w-2/3 mx-auto">Escoge que proyecto Trabajar <span
+                        class="text-indigo-600">{{obj.name}}</span></h1>
+                        <button type="button" (click)="proyecto1(obj.history[0])" class="btn btn-warning mx-5  my-4">{{obj.history[0].proyecto}}</button>
+                        <button type="button" (click)="proyecto2(obj.history[1])" class="btn btn-info mx-5 my-4">{{obj.history[1].proyecto}}</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+<div class="py-10 " style="background: #f0f0f0;">
+    <div class="container mx-auto">
+        <h1 class="font-black text-5xl text-center md:w-2/3 mx-auto">Seguimientos de tus tareas <span
+                class="text-indigo-600"></span></h1>
+        <div class="mt-12 md:flex">
+            <div class="md:w-1/2 lg:w-2/5" style="margin-right: 40px;" *ngFor="let obj of nombre">
+                <h2 class="font-black text-3xl text-center">Crea tu tarea</h2>
+                <p class="text-lg mt-5 text-center mb-10">
+                    Control tarea de
+                    <span class="text-indigo-600 font-bold">{{obj}}</span>
+                </p>
+
+                <form [formGroup]="ControlCitas" (ngSubmit)="enviarDatos()"
+                    class="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
+                    <div class="mb-5">
+                        <label For="documento" class="block text-gray-700 uppercase font-bold">Numero de
+                            Documento</label>
+                        <input id="documento" formControlName="documento" type="text" placeholder="ej. 1005282300"
+                            class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" />
+                        <span class="error" *ngIf="ControlCitas.get('documento')?.hasError('maxlength')">numero
+                            invalido</span>
+                        <span class="error" *ngIf="ControlCitas.get('documento')?.hasError('minlength')">numero
+                            invalido</span>
+                        <span class="error"
+                            *ngIf="ControlCitas.get('documento')?.hasError('required') && ControlCitas.get('documento')?.touched">Numero
+                            de Documento Obligatorio</span>
+                    </div>
+                    <div class="mb-5">
+                        <label For="nombre" class="block text-gray-700 uppercase font-bold">Nombre Completo</label>
+                        <input id="nombre"  formControlName="nombre" type="text"
+                            placeholder="ej. Damon Rodriguez Salvatore"
+                            class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" />
+                        <span class="error"
+                            *ngIf="ControlCitas.get('nombre')?.hasError('required') && ControlCitas.get('nombre')?.touched">Nombre
+                            Obligatorio</span>
+                    </div>
+                    <div class="mb-5">
+                        <label For="tarea" class="block text-gray-700 uppercase font-bold">Nombre Tarea</label>
+                        <input id="tarea" formControlName="tarea" type="tarea"
+                            placeholder="ej. Carrito compras"
+                            class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" />
+                        <span class="error"
+                            *ngIf="ControlCitas.get('tarea')?.hasError('required') && ControlCitas.get('tarea')?.touched">Tarea
+                            Obligatorio</span>
+                    </div>
+                    <div class="mb-5">
+                        <label For="estado" class="block text-gray-700 uppercase font-bold">Estado de la tarea</label>
+                        <div class="form-check form-check-inline ">
+                            <input style="width: 15px;
+                            height: 15px;" class="form-check-input" type="radio"
+                                formControlName="tipoD" id="inlineRadio1" value="en espera">
+                            <label class="form-check-label" for="inlineRadio1">En espera</label>
+                        </div>
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input" formControlName="tipoD" style="width: 15px;
+                            height: 15px;" type="radio" value="Proceso" id="inlineRadio1">
+                            <label class="form-check-label" for="inlineRadio1">Proceso</label>
+                        </div>
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input" formControlName="tipoD" style="width: 15px;
+                            height: 15px;" type="radio" value="Cancelada" id="inlineRadio1">
+                            <label class="form-check-label" for="inlineRadio1">Cancelada</label>
+                        </div>
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input" formControlName="tipoD" style="width: 15px;
+                            height: 15px;" type="radio" value="Terminada" id="inlineRadio1">
+                            <label class="form-check-label" for="inlineRadio1">Terminada</label>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <label htmlFor="comentario" class="block text-gray-700 uppercase font-bold">Comentario</label>
+                        <textarea #comentario formControlName="comentario"
+                            class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" id="comentario"
+                            placeholder="Describe"></textarea>
+                        <span class="error"
+                            *ngIf="ControlCitas.get('comentario')?.hasError('required') && ControlCitas.get('comentario')?.touched">Comentario
+                            Obligatorio</span>
+                    </div>
+                    <input #registrarse class="btn bg-indigo-600 text-white w-full uppercase p-3 font-bold hover:bg-indigo-800"
+                        [disabled]="ControlCitas.invalid" value="Registrarse" type="submit"/>
+                </form>
+            </div>
+            <div class="md:w-1/2 lg:w-4/5 md:h-screen overflow-y-scroll">
+
+                <ng-template [ngIf]="pepe.length" [ngIfElse]="loading">
+                    <div class="lessons-list">
+                        <h2 class="font-black text-3xl text-center">ListadoPacientes</h2>
+                        <p class="text-xl mt-5 mb-10 text-center">Administra tus <span
+                                class="text-indigo-600 font-bold">Pacientes y
+                                Citas</span></p>
+                    </div>
+                </ng-template>
+
+                <div *ngFor="let control of pepe" class="m-3 bg-white shadow-md px-5 py-10 rounded-xl">
+                    <p class="font-bold mb-3 text-gray-700 uppercase">Documento:
+                        <span class="font-normal normal-case">{{control.documento}}</span>
+                    </p>
+                    <p class="font-bold mb-3 text-gray-700 uppercase">Nombre:
+                        <span class="font-normal normal-case">{{control.nombre}}</span>
+                    </p>
+                    <p class="font-bold mb-3 text-gray-700 uppercase">Email:
+                        <span class="font-normal normal-case">{{control.tarea}}</span>
+                    </p>
+                    <p class="font-bold mb-3 text-gray-700 uppercase">Fecha de la Cita:
+                        <span class="font-normal normal-case">{{control.tipoD}}</span>
+                    </p>
+                    <p class="font-bold mb-3 text-gray-700 uppercase">Síntomas:
+                        <span class="font-normal normal-case">{{control.comentario}}</span>
+                    </p>
+                    <div  class="flex justify-between mt-10">
+                        <button #boton #editar type="button"
+                            class="font-bold text-white bg-indigo-500 hover:bg-indigo-700 uppercase py-2 px-10 rounded-lg" (click)="Trayendoobjeto(control)">editar</button>
+                        <button type="button"
+                            class="font-bold text-white bg-red-500 hover:bg-red-700 uppercase py-2 px-10 rounded-lg"(click)="Elimiando(control.id)">eliminar</button>
+                    </div>
+                </div>
+                <ng-template #loading>
+                    <div>
+                        <h2 class="font-black text-3xl text-center">No hay tareas</h2>
+                        <p class="text-xl mt-5 mb-10 text-center">Comienza agregando tareas
+                            <span class="text-indigo-600 font-bold">aparecerán en este lugar</span>
+                        </p>
+                    </div>
+                </ng-template>
+
+
+            </div>
+        </div>
+    </div>
+</div>

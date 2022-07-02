@@ -14,11 +14,15 @@ const empresaSchema = mongoose.Schema({
         type: String,
         required: false
     },
-    dirección:{
+    direccion:{
         type: String,
         required: false
     },
     telefono:{
+        type: String,
+        required: false
+    },
+    correo:{
         type: String,
         required: false
     },
