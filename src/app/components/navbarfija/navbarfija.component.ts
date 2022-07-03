@@ -72,7 +72,7 @@ export class NavbarfijaComponent implements OnInit {
         localStorage.setItem('usuario', '[]')
         this.popo = localStorage.getItem('Nombre')
         this.pepe = JSON.parse(this.popo)
-        this.router.navigate(['/registro'])
+        this.router.navigate(['/'])
         setTimeout(() =>{
             window.location.reload()
         },200)
