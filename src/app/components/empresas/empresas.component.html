@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <div class="card mx-5 my-5">
+            <div class="card mx-5 my-5" >
                 <div class="card-body text-center" *ngFor="let obj of  EmpresaUsuario">
                     <h1 class="card-title">{{obj.name}}</h1>
                     <h6 class="card-subtitle mb-2 text-muted"><span>NIT:</span>{{obj.nit}}</h6>
@@ -12,169 +12,11 @@
             </div>
         </div>
         <div class="col-12 text-center">
-            <div class="container mx-auto " *ngFor="let obj of  EmpresaUsuario">
+            <div class="container mx-auto "*ngFor="let obj of  EmpresaUsuario" >
                 <h1 class="font-black text-5xl text-center md:w-2/3 mx-auto">Escoge que proyecto Trabajar <span
                         class="text-indigo-600">{{obj.name}}</span></h1>
-                <label>Proyecto 1 :</label>
-                <button type="button" (click)="proyecto1(obj.history[0])"
-                    class="btn btn-warning mx-2 my-4">{{obj.history[0].proyecto}}</button>
-                <label>Proyecto 2 :</label>
-                <button type="button" (click)="proyecto2(obj.history[1])"
-                    class="btn btn-info mx-2 my-4">{{obj.history[1].proyecto}}</button>
-            </div>
+                        <button type="button" (click)="proyecto1(obj.history[0])" class="btn btn-warning mx-5  my-4">{{obj.history[0].proyecto}}</button>
+                        <button type="button" (click)="proyecto2(obj.history[1])" class="btn btn-info mx-5 my-4">{{obj.history[1].proyecto}}</button>
         </div>
-        <div class="container mx-auto col-12 ">
-            <div class="row">
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{empresa1}}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="lessons-list" *ngFor="let obj of  comentarios">
-                                    <h2 class="font-black text-3xl text-center">Agrega un comentario a la tarea de
-                                        {{obj.nombre}}</h2>
-                                    <p class="text-xl mt-5 mb-10 text-center">la tarea es {{obj.tarea}} <span
-                                            class="text-indigo-600 font-bold">
-                                            del proyecto {{obj.proyecto}}</span></p>
-                                </div>
-                                <div class="mb-3">
-                                    <form [formGroup]="formularioComentario" (ngSubmit)=" agregar()">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Escribe tu
-                                            comentario</label>
-                                        <textarea class="form-control" formControlName="comentarios"
-                                            id="exampleFormControlTextarea1" rows="3"></textarea>
-                                        <span class="error"
-                                            *ngIf="formularioComentario.get('comentarios')?.hasError('required') && formularioComentario.get('comentarios')?.touched">Comentario
-                                            Obligatorio</span>
-                                        <button [disabled]="formularioComentario.invalid" type="submit"
-                                            class="btn btn-warning">Agregar</button>
-                                    </form>
-
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModal8Label"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModal8Label">Comentarios</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-12" *ngFor="let obj of  VerComentarios" >
-                                            <div class="card mt-4" >
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Creado por</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted">{{obj.nombre}}</h6>
-                                                    <p class="card-text">comentario: {{obj.comentarios}}</p>
-                                                </div>
-                                                <ng-template [ngIf]="obj.usuario == usuario1">
-                                                    <button type="button" (click)="eliminar(obj)" class="btn btn-danger">Eliminar</button>
-                                                </ng-template>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-6 mt-2" *ngFor="let obj of  tareas">
-                    <button data-bs-toggle="modal" data-bs-target="#exampleModal3"
-                        class="btn bg-warning text-dark w-full uppercase p-3 font-bold"
-                        (click)="seguimiento(obj.proyecto)" type="submit">Ver seguimiento {{obj.proyecto}}</button>
-                </div>
-            </div>
-            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModal3Label"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModal3Label">{{empresa1}}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="w:full md:h-screen overflow-y-scroll">
-
-                                <ng-template [ngIf]="tareasProyectos.length" [ngIfElse]="loading">
-                                    <div class="lessons-list">
-                                        <h2 class="font-black text-3xl text-center">Listado Tareas</h2>
-                                        <p class="text-xl mt-5 mb-10 text-center">Administra tus <span
-                                                class="text-indigo-600 font-bold">tareas y
-                                                proyectos</span></p>
-                                    </div>
-                                </ng-template>
-
-                                <div *ngFor="let control of tareasProyectos"
-                                    class="m-3 bg-gray-300 shadow-md px-5 py-10 rounded-xl">
-                                    <h1 class="text-center fs-3">{{control.proyecto}}</h1>
-
-                                    <p class="font-bold mb-3 text-gray-700 uppercase">Documento:
-                                        <span class="font-normal normal-case">{{control.documento}}</span>
-                                    </p>
-                                    <p class="font-bold mb-3 text-gray-700 uppercase">Creada por:
-                                        <span class="font-normal normal-case">{{control.nombre}}</span>
-                                    </p>
-                                    <p class="font-bold mb-3 text-gray-700 uppercase">Tipo de tarea:
-                                        <span class="font-normal normal-case">{{control.tarea}}</span>
-                                    </p>
-                                    <p class="font-bold mb-3 text-gray-700 uppercase">Estado de la tarea:
-                                        <span class="font-normal normal-case">{{control.tipoD}}</span>
-                                    </p>
-                                    <p class="font-bold mb-3 text-gray-700 uppercase">Comentario:
-                                        <span class="font-normal normal-case">{{control.comentario}}</span>
-                                    </p>
-                                    <div class="col-12 mt-10">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <button #boton #editar type="button" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal" style="font-size: 10px"
-                                                    class="font-bold text-white bg-indigo-500  hover:bg-indigo-700 uppercase py-2 px-4 rounded-lg"
-                                                    (click)="Trayendoobjeto(control)">Agregar Comentario</button>
-                                            </div>
-                                            <div class="col-6">
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" (click)="ver(control)"
-                                                    data-bs-target="#exampleModal8">
-                                                    Ver comentarios
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p>*Solo el creador puede editar y eliminar</p>
-                                </div>
-                                <ng-template #loading>
-                                    <div>
-                                        <h2 class="font-black text-3xl text-center">No hay tareas</h2>
-                                        <p class="text-xl mt-5 mb-10 text-center">Comienza agregando tareas
-                                            <span class="text-indigo-600 font-bold">aparecerán en este lugar</span>
-                                        </p>
-                                    </div>
-                                </ng-template>
-                                <div class="modal-footer text-center">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+    </div>
+</div>
