@@ -24,9 +24,8 @@ exports.obtenerEmpresas = async(req, res) => {
 }
 exports.actualizarEmpresa = async (req, res) => {
     try {
-        const { history,name } = req.body
-
-        const existeUsuario = await Empresas.findOne({ name})
+        const { history } = req.body
+        const existeUsuario = await Empresas.findById(req.params.id)
         if (!existeUsuario) {
             res.status(404).json({ mensaje: "No existe la información solicitada" })
         }
@@ -34,7 +33,7 @@ exports.actualizarEmpresa = async (req, res) => {
         existeUsuario.history = history
 
 
-        let procesoUpdate = await Empresas.findOneAndUpdate({ name }, existeUsuario, { new: true })
+        let procesoUpdate = await Empresas.findOneAndUpdate({_id: req.params.id }, existeUsuario, { new: true })
         res.json(procesoUpdate)
 
     } catch (error) {

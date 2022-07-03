@@ -39,16 +39,18 @@ exports.obtenerContacto = async (req, res) => {
         res.status(500).send("Hay un problema")
     }
 }
-exports.actualizarContacto = async (req, res) => {
+exports.actualizarContacto = async(req, res) => {
     try {
-        const {tareas } = req.body
+        const {tareas} = req.body
 
-        const existeUsuario = await Contacto.findById(req.params.id)
-        if (!existeUsuario) {
+        let contacto = await Contacto.findById(req.params.id)
+        if (!contacto) {
             res.status(404).json({ mensaje: "No existe la información solicitada" })
         }
-        existeUsuario.tareas = tareas
-        let procesoUpdate = await Contacto.findOneAndUpdate({ email }, existeUsuario, { new: true })
+
+        contacto.tareas = tareas
+       
+        let procesoUpdate = await Contacto.findOneAndUpdate({ _id: req.params.id }, contacto, { new: true })
         res.json(procesoUpdate)
 
     } catch (error) {

@@ -22,6 +22,7 @@ export class EmpresasComponent implements OnInit {
             const arregloEmpresas = data.filter((element: any) => element.name == empresa[0])
             this.EmpresaUsuario = arregloEmpresas
             console.log(this.EmpresaUsuario)
+            localStorage.setItem('idEmpresa', JSON.stringify(this.EmpresaUsuario[0]._id))
         }, error => {
             console.log(error);
         })
@@ -32,7 +33,7 @@ export class EmpresasComponent implements OnInit {
     this.router.navigate(['/citas'])
     }
     proyecto2(tarea: any) {
-    localStorage.setItem('proyecto2', JSON.stringify(tarea)) 
+    localStorage.setItem('proyecto2', JSON.stringify(tarea))
     localStorage.removeItem('proyecto1')
     this.router.navigate(['/citas'])
     }

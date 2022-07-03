@@ -27,8 +27,8 @@ export class Contacto1Service {
     postLogin(loginFormulario: Login):Observable<any>{
         return this.http.post(`${this.url_api}/login`, loginFormulario)
     }
-    putUser(obj:any,id:String):Observable<any>{
-        return this.http.put(`${this.url_api}/actualizar-contacto/${id}`, obj)
+    putUser(tareas:any,id:String):Observable<any>{
+        return this.http.put(`${this.url_api}/actualizar-contacto/${id}`, tareas)
     }
     deleteContacto(id:String):Observable<any>{
         return this.http.delete(`${this.url_api}/borrar-contacto/${id}`)

@@ -82,29 +82,30 @@
             </div>
             <div class="md:w-1/2 lg:w-4/5 md:h-screen overflow-y-scroll">
 
-                <ng-template [ngIf]="pepe.length" [ngIfElse]="loading">
+                <ng-template [ngIf]="user1.length" [ngIfElse]="loading">
                     <div class="lessons-list">
-                        <h2 class="font-black text-3xl text-center">ListadoPacientes</h2>
+                        <h2 class="font-black text-3xl text-center">Listado Tareas</h2>
                         <p class="text-xl mt-5 mb-10 text-center">Administra tus <span
-                                class="text-indigo-600 font-bold">Pacientes y
-                                Citas</span></p>
+                                class="text-indigo-600 font-bold">tareas y
+                                proyectos</span></p>
                     </div>
                 </ng-template>
 
-                <div *ngFor="let control of pepe" class="m-3 bg-white shadow-md px-5 py-10 rounded-xl">
+                <div *ngFor="let control of user1" class="m-3 bg-white shadow-md px-5 py-10 rounded-xl">
+                    <h1 class="text-center fs-3">{{control.proyecto}}</h1>
                     <p class="font-bold mb-3 text-gray-700 uppercase">Documento:
                         <span class="font-normal normal-case">{{control.documento}}</span>
                     </p>
                     <p class="font-bold mb-3 text-gray-700 uppercase">Nombre:
                         <span class="font-normal normal-case">{{control.nombre}}</span>
                     </p>
-                    <p class="font-bold mb-3 text-gray-700 uppercase">Email:
+                    <p class="font-bold mb-3 text-gray-700 uppercase">Tipo de tarea:
                         <span class="font-normal normal-case">{{control.tarea}}</span>
                     </p>
-                    <p class="font-bold mb-3 text-gray-700 uppercase">Fecha de la Cita:
+                    <p class="font-bold mb-3 text-gray-700 uppercase">Estado de la tarea:
                         <span class="font-normal normal-case">{{control.tipoD}}</span>
                     </p>
-                    <p class="font-bold mb-3 text-gray-700 uppercase">Síntomas:
+                    <p class="font-bold mb-3 text-gray-700 uppercase">Comentario:
                         <span class="font-normal normal-case">{{control.comentario}}</span>
                     </p>
                     <div  class="flex justify-between mt-10">

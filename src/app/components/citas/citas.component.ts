@@ -11,9 +11,14 @@ import Swal from 'sweetalert2'
     styleUrls: ['./citas.component.css']
 })
 export class CitasComponent implements OnInit {
-    user:any
-    TareasLLegando :any
-    tarea:any
+    nuevoArreglo: any
+    user1: any
+    dataempresa: any
+    empresaID: any
+    empresa1: any
+    user: any
+    TareasLLegando: any
+    tarea: any
     CitasGlobales: any
     ControlCitas: FormGroup
     revisarCorreo = /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/
@@ -24,7 +29,6 @@ export class CitasComponent implements OnInit {
     id: any | null
     @ViewChild('registrarse') registrarseHTML?: ElementRef
     @ViewChild('editar') editar?: ElementRef
-
     constructor(private fb: FormBuilder, private renderer2: Renderer2, private _Service: EmpresasService, private _ServiceUsuario: Contacto1Service) {
         this.ControlCitas = fb.group({
             documento: ['', Validators.compose([
@@ -37,9 +41,7 @@ export class CitasComponent implements OnInit {
             tipoD: ['', Validators.required],
             comentario: ['', Validators.required]
         })
-
     }
-
     ngOnInit(): void {
         this.encontrarUsuario()
         const nombreLS: any = localStorage.getItem('Nombre')
@@ -52,9 +54,12 @@ export class CitasComponent implements OnInit {
             this.popo = localStorage.getItem(this.nombre)
             this.pepe = JSON.parse(this.popo)
         }
-
+        let empresa1: any = localStorage.getItem('idEmpresa')
+        empresa1 = JSON.parse(empresa1)
+        this.empresaID = empresa1
         let empresa: any = localStorage.getItem('Empresa')
         empresa = JSON.parse(empresa)
+        this.empresa1 = empresa
         let guardar: any
         if (localStorage.getItem('proyecto1')) {
             guardar = localStorage.getItem('proyecto1')
@@ -63,10 +68,10 @@ export class CitasComponent implements OnInit {
         }
         guardar = JSON.parse(guardar)
         this.TareasLLegando = guardar
-        console.log(this.TareasLLegando)
-
         this._Service.getEmpresas().subscribe(data => {
             const arregloEmpresas = data.filter((element: any) => element.name == empresa[0])
+            this.dataempresa = arregloEmpresas[0].history.filter((element: any) => element.proyecto == this.TareasLLegando.proyecto)
+            this.dataempresa = this.dataempresa[0].tareas
             let arreglo = arregloEmpresas.forEach((element: any) => {
                 let tareas = element.history
                 this.tarea = tareas
@@ -75,22 +80,17 @@ export class CitasComponent implements OnInit {
             console.log(error);
         })
     }
-
-    encontrarUsuario(){
-       let user :any = localStorage.getItem('usuario')
-       user = JSON.parse(user)
+    encontrarUsuario() {
+        let user: any = localStorage.getItem('usuario')
+        user = JSON.parse(user)
         this._ServiceUsuario.getContacto(user).subscribe(data => {
-            console.log(data)
             this.user = data
-        },error => {
+            this.user1 = data.tareas
+        }, error => {
             console.log(error);
         })
     }
-
-
-
     generadoraID() {
-
         let random = Math.random().toString(36).substring(2);
         let tipoD = Date.now().toString(36)
         return random + tipoD;
@@ -119,28 +119,51 @@ export class CitasComponent implements OnInit {
             confirmButtonText: 'Si, Eliminalo!'
         }).then((result) => {
             if (result.isConfirmed) {
-                const arregloGlobal: any = localStorage.getItem('control-medico')
-                const arregloGlobal1: any = JSON.parse(arregloGlobal)
-                const nuevoarreglo = this.pepe.filter((arregloViejo: any) => arregloViejo.id !== this.id)
-                this.GuardarCitas = nuevoarreglo
-                const nuevoArregloGlobal = arregloGlobal1.filter((arregloViejo1: any) => arregloViejo1.id !== this.id)
-                this.CitasGlobales = nuevoArregloGlobal
-                localStorage.setItem(this.nombre, JSON.stringify(this.GuardarCitas))
-                localStorage.setItem('control-medico', JSON.stringify(this.CitasGlobales))
-                this.id = null
-                this.popo = localStorage.getItem(this.nombre)
-                this.pepe = JSON.parse(this.popo)
-                Swal.fire(
-                    'Eliminado!',
-                    'Se ha eliminado correctamente.',
-                    'success'
-                )
+                this._ServiceUsuario.getContacto(this.user._id).subscribe(data => {
+                    this.nuevoArreglo = data.tareas.filter((arregloViejo: any) => arregloViejo.id !== this.id)
+                    let obj = {
+                        tareas: this.nuevoArreglo
+                    }
+                    this._ServiceUsuario.putUser(obj, this.user._id).subscribe(data => {
+                        this.user1 = data.tareas
+                    }, error => {
+                        console.log(error)
+                    })
+                }, errprivate => {
+                    console.log(errprivate)
+                })
+                const nuevoArreglo = this.dataempresa.filter((arregloViejo: any) => arregloViejo.id !== this.id)
+                const obj1 = {
+                    proyecto: this.TareasLLegando.proyecto,
+                    tareas: nuevoArreglo
+                }
+                this.CitasGlobales = this.tarea.map((viejoArreglo: any) => viejoArreglo.proyecto == this.TareasLLegando.proyecto ? obj1 : viejoArreglo)
+                let arreglo = {
+                    history: this.CitasGlobales
+                }
+                this._Service.putEmpresas(arreglo, this.empresaID).subscribe(data => {
+                    this.dataempresa = data.history.filter((data1: any) => data1.proyecto == this.TareasLLegando.proyecto)
+                    this.dataempresa = this.dataempresa[0].tareas
+                    console.log(data)
+                }, error => {
+                    console.log(error)
+                })
+
+                // this.id = null
+                // this.popo = localStorage.getItem(this.nombre)
+                // this.pepe = JSON.parse(this.popo)
+                // Swal.fire(
+                //     'Eliminado!',
+                //     'Se ha eliminado correctamente.',
+                //     'success'
+                // )
             }
         })
     }
     enviarDatos() {
-        // const registrar = this.registrarseHTML?.nativeElement
+        const registrar = this.registrarseHTML?.nativeElement
         let citas = {
+            proyecto: this.TareasLLegando.proyecto,
             documento: this.ControlCitas.get('documento')?.value,
             nombre: this.ControlCitas.get('nombre')?.value,
             tarea: this.ControlCitas.get('tarea')?.value,
@@ -148,50 +171,77 @@ export class CitasComponent implements OnInit {
             comentario: this.ControlCitas.get('comentario')?.value,
             id: ''
         }
-        
-
-        let Hola:any = []
-        Hola.push(citas)
+        if (this.id == null) {
+            citas.id = this.generadoraID()
+            let tareaUSer = {
+                tareas: [...this.user.tareas, citas]
+            }
+            console.log(tareaUSer)
+            this._ServiceUsuario.putUser(tareaUSer, this.user._id).subscribe(data => {
+                this.user = data
+                this.user1 = data.tareas
+            }, error => {
+                console.log(error)
+            })
             const obj = {
                 proyecto: this.TareasLLegando.proyecto,
-                tareas: Hola
+                tareas: [...this.dataempresa, citas]
             }
-            // console.log(obj)
-        this._ServiceUsuario.putUser(citas, this.user._id).subscribe(data => {
-            console.log(data)
-        },error => {
-            console.log(error)
-        })
-        this.CitasGlobales = this.tarea.map((viejoArreglo: any) => viejoArreglo.proyecto == this.TareasLLegando.proyecto ? obj : viejoArreglo)
-        // if (this.id == null) {
-        //     citas.id = this.generadoraID()
-        //     this.GuardarCitas.push(citas)
-        //     this.CitasGlobales.push(citas)
-        // } else {
-        //     citas.id = this.id
-        //     const arregloGlobal:any = localStorage.getItem('control-medico')
-        //     const arregloGlobal1:any = JSON.parse(arregloGlobal)
-        //     this.CitasGlobales = arregloGlobal1.map((viejoArreglo: any) => viejoArreglo.id === this.id ? citas : viejoArreglo)
-
-        //     const nuevoArreglo = this.GuardarCitas.map((viejoArreglo: any) => viejoArreglo.id === this.id ? citas : viejoArreglo)
-        //     this.GuardarCitas = nuevoArreglo
-        //     this.id = null
-        //     Swal.fire({
-        //         position: 'top-end',
-        //         icon: 'success',
-        //         title: 'Se ha editado correctamento',
-        //         showConfirmButton: false,
-        //         timer: 1500
-        //     })
-        //     this.renderer2.setAttribute(registrar, 'value', 'Registrarse')
-        // }
-        // localStorage.setItem(this.nombre, JSON.stringify(this.GuardarCitas))
-        // setTimeout(() => {
-        //     localStorage.setItem('control-medico', JSON.stringify(this.CitasGlobales))
-        // },500)
-        // this.popo = localStorage.getItem(this.nombre)
-        // this.pepe = JSON.parse(this.popo)
-        // this.ControlCitas.reset()
+            this.CitasGlobales = this.tarea.map((viejoArreglo: any) => viejoArreglo.proyecto == this.TareasLLegando.proyecto ? obj : viejoArreglo)
+            let arreglo = {
+                history: this.CitasGlobales
+            }
+            this._Service.putEmpresas(arreglo, this.empresaID).subscribe(data => {
+                console.log(data)
+                this.dataempresa = data.history.filter((data1: any) => data1.proyecto == this.TareasLLegando.proyecto)
+                this.dataempresa = this.dataempresa[0].tareas
+            }, error => {
+                console.log(error)
+            })
+        } else {
+            citas.id = this.id
+            this._ServiceUsuario.getContacto(this.user._id).subscribe(data => {
+                this.nuevoArreglo = data.tareas.map((viejoArreglo: any) => viejoArreglo.id === this.id ? citas : viejoArreglo)
+                let obj = {
+                    tareas: this.nuevoArreglo
+                }
+                this._ServiceUsuario.putUser(obj, this.user._id).subscribe(data => {
+                    this.user1 = data.tareas
+                }, error => {
+                    console.log(error)
+                })
+            }, errprivate => {
+                console.log(errprivate)
+            })
+            const nuevoArreglo = this.dataempresa.map((viejoArreglo: any) => viejoArreglo.id === this.id ? citas : viejoArreglo)
+            const obj1 = {
+                proyecto: this.TareasLLegando.proyecto,
+                tareas: nuevoArreglo
+            }
+            this.CitasGlobales = this.tarea.map((viejoArreglo: any) => viejoArreglo.proyecto == this.TareasLLegando.proyecto ? obj1 : viejoArreglo)
+            let arreglo = {
+                history: this.CitasGlobales
+            }
+            this._Service.putEmpresas(arreglo, this.empresaID).subscribe(data => {
+                this.dataempresa = data.history.filter((data1: any) => data1.proyecto == this.TareasLLegando.proyecto)
+                this.dataempresa = this.dataempresa[0].tareas
+                console.log(data)
+            }, error => {
+                console.log(error)
+            })
+            setTimeout(() => {
+                this.id = null
+            }, 1000)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Se ha editado correctamento',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            this.renderer2.setAttribute(registrar, 'value', 'Registrarse')
+        }
+        this.ControlCitas.reset()
     }
 
 }

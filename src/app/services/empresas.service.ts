@@ -17,7 +17,11 @@ export class EmpresasService {
         return this.http.get(`${this.url_api}/obtener-empresas`)
     }
 
-  
+    putEmpresas(obj:any, id:any): Observable<any>{
+        return this.http.put(`${this.url_api}/actualizar-empresa/${id}`,obj)
+    }
+
+
 
 
 
