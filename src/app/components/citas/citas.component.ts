@@ -12,7 +12,7 @@ import Swal from 'sweetalert2'
 })
 export class CitasComponent implements OnInit {
     nuevoArreglo: any
-    user1: any
+    user1: any= []
     dataempresa: any
     empresaID: any
     empresa1: any
@@ -235,7 +235,7 @@ export class CitasComponent implements OnInit {
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Se ha editado correctamento',
+                title: 'Se ha editado correctamente',
                 showConfirmButton: false,
                 timer: 1500
             })
