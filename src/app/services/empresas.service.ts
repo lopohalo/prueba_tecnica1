@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class EmpresasService {
 
-    url_api = 'http://localhost:4500/api';
+    url_api = 'http://localhost:4000/api';
 
     constructor( private http: HttpClient) { }
 
